@@ -1,25 +1,31 @@
-//express + parser
+//express + parser + path finder for files
 const path = require('path');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
+//templating engine
+app.set('view engine','pug');
+app.set('views','./views');
+
 //routes
-const adminRoutes = require('./routes/admin');
-const shopRoutes = require('./routes/shop');
+const adminData = require('./routes/admin');
+const shopData = require('./routes/shop');
 
 
 //parser to parse all request on our server
 app.use(bodyParser.urlencoded({extended:false}));
+
+//funnel all request to fetch static files from this directory
 app.use(express.static(path.join(__dirname,'public')));
 
 
-app.use('/admin',adminRoutes);
-app.use(shopRoutes);
+app.use('/admin',adminData.routes);
+app.use(shopData.routes);
 
 //404 page if no routes get hit, this is what will be returned
 app.use('/',(req,res,next)=>{
-    res.status(404).sendFile(path.join(__dirname,'views','404.html'));
+    res.status(404).render('404');
 })
 
 
