@@ -1,6 +1,5 @@
 const path = require('path');
 const express = require('express');
-const rootDir = require('../util/path');
 const router = express.Router();
 
 
@@ -9,7 +8,11 @@ const products = [];
 
 // admin/add-product -> GET
 router.get('/add-product',(req,res,next)=>{
-    res.sendFile(path.join(rootDir,'ExpressA2','views','add-product.html'));
+    context={
+        path: '/admin/add-product',
+        PageTitle: 'Add Product',
+    }
+    res.render('add-product',context)
 });
 
 

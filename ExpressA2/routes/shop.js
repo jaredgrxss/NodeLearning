@@ -8,8 +8,10 @@ const adminData = require('./admin');
 router.get('/',(req,res,next)=>{
     const products = adminData.products;
     context = {
-        'products': products,
-        'docTitle': "Jared's Shop",
+        path: '/',
+        products: products,
+        docTitle: "Jared's Shop",
+        PageTitle: 'Main'
     }
     res.render('shop',context);
 });

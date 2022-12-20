@@ -5,7 +5,7 @@ const app = express();
 const bodyParser = require('body-parser');
 
 //templating engine
-app.set('view engine','pug');
+app.set('view engine','ejs');
 app.set('views','./views');
 
 //routes
@@ -25,7 +25,11 @@ app.use(shopData.routes);
 
 //404 page if no routes get hit, this is what will be returned
 app.use('/',(req,res,next)=>{
-    res.status(404).render('404');
+    context = {
+        PageTitle: 'Error',
+        path:'None',
+    }
+    res.status(404).render('404',context);
 })
 
 
