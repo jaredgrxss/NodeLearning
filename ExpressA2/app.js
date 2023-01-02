@@ -11,6 +11,7 @@ app.set('views','./views');
 //routes
 const adminData = require('./routes/admin');
 const shopData = require('./routes/shop');
+const errorController = require('./controllers/404');
 
 
 //parser to parse all request on our server
@@ -24,13 +25,7 @@ app.use('/admin',adminData.routes);
 app.use(shopData.routes);
 
 //404 page if no routes get hit, this is what will be returned
-app.use('/',(req,res,next)=>{
-    context = {
-        PageTitle: 'Error',
-        path:'None',
-    }
-    res.status(404).render('404',context);
-})
+app.use('/',errorController.Error);
 
 
 app.listen(8000);
