@@ -23,7 +23,9 @@ router.get('/edit-product/:productId',adminController.getEditProduct);
 
 
 //posting a product 
-router.get('/edit-product',)
+router.post('/edit-product',adminController.postEditProduct);
 
+
+router.post('/delete-product',adminController.deleteProduct);
 //export
 exports.routes = router;
